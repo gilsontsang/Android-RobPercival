@@ -1,4 +1,4 @@
-// Button click -> Print to log. 
+// Print to log -> Button click. 
 // Inside the button, we enter the "clickFunction" for 'onClick'
 
 public void clickFunction (View view) {
@@ -6,7 +6,7 @@ public void clickFunction (View view) {
 }
 
 
-// Username + Password + Button click -> Print to log.
+// Print to log -> Username + Password + Button click.
 
 public void logButton(View view) {
         EditText usernameEditText = findViewById(R.id.usernameEditText);
@@ -15,11 +15,19 @@ public void logButton(View view) {
         Log.i("Password", passwordEditText.getText().toString());
 }
 
-// Username + Button click -> Show Username on screen.
+// Show Username on screen -> Username + Button click.
 
     public void logButton(View view) {
         EditText usernameEditText = findViewById(R.id.usernameEditText);
         Log.i("Username", usernameEditText.getText().toString());
-        Toast.makeText(MainActivity.this, usernameEditText.getText().toString(), Toast.LENGTH_LONG)
-                .show();
+        Toast.makeText(MainActivity.this, "Your username is " + 
+		usernameEditText.getText().toString(), Toast.LENGTH_LONG).show();
+    }
+
+// Drag images into /res/drawable/ -> Adding images
+// Following... Change image on Button Click -> imageView6 to Corgi.
+
+    public void sayHi(View view) {
+        ImageView imageView6 = findViewById(R.id.imageView6);
+        imageView6.setImageResource(R.drawable.corgi);
     }
