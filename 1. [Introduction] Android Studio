@@ -1,0 +1,25 @@
+// Button click -> Print to log. 
+// Inside the button, we enter the "clickFunction" for 'onClick'
+
+public void clickFunction (View view) {
+	Log.i("Info", "Button Pressed");
+}
+
+
+// Username + Password + Button click -> Print to log.
+
+public void logButton(View view) {
+        EditText usernameEditText = findViewById(R.id.usernameEditText);
+        EditText passwordEditText = findViewById(R.id.passwordEditText);
+        Log.i("Username", usernameEditText.getText().toString());
+        Log.i("Password", passwordEditText.getText().toString());
+}
+
+// Username + Button click -> Show Username on screen.
+
+    public void logButton(View view) {
+        EditText usernameEditText = findViewById(R.id.usernameEditText);
+        Log.i("Username", usernameEditText.getText().toString());
+        Toast.makeText(MainActivity.this, usernameEditText.getText().toString(), Toast.LENGTH_LONG)
+                .show();
+    }
