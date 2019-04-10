@@ -1,0 +1,59 @@
+/*
+* This program converts 1CAD = 0.75USD.
+*/
+
+// Main Class
+
+public class MainActivity extends AppCompatActivity {
+
+    public void convertButton(View view) {
+        EditText numInput = findViewById(R.id.numInput);
+        Double output = Double.parseDouble(numInput.getText().toString());
+        output *= 0.75;
+        Toast.makeText(MainActivity.this, numInput.getText().toString() + "CAD = " +
+                output.toString() + "USD", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+}
+
+// Activity Class
+
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/numInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="Convert CAD to USD"
+        android:inputType="number"
+        android:onClick="convertButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:alpha="1"
+        android:onClick="convertButton"
+        android:text="Convert"
+        app:layout_constraintTop_toBottomOf="@+id/numInput"
+        tools:layout_editor_absoluteX="75dp" />
+
+</android.support.constraint.ConstraintLayout>
