@@ -1,0 +1,26 @@
+/*
+* This program return true or false based on whether the input is > 0;
+*/
+
+public class MyClass {
+    public static void main(String args[]) {
+        
+        class Numbers {
+            int number;
+            
+            public boolean isPositive(int number) {
+                if (number < 0) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+        }
+        
+        Numbers numbers = new Numbers();
+        System.out.println(numbers.isPositive(-5));
+        
+        
+    }
+}
