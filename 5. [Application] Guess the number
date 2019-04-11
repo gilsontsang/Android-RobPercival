@@ -1,0 +1,99 @@
+/*
+* This program lets the user guess a number between 1-20. It is quite interesting for the fact that, if this was done solely in Java, 
+* a 'while-loop' would be required, but I guess as long as the program is running, there must be some while loop running in the 
+* background, waiting for the user input...
+*/
+
+// Main Class
+
+package com.example.demoapp7;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.Random;
+
+public class MainActivity extends AppCompatActivity {
+
+    private Random random = new Random();
+    private int randomNum = random.nextInt(20) + 1;
+
+    public void guessClick(View view){
+        EditText numGuess = findViewById(R.id.numGuess);
+        int guess = Integer.parseInt(numGuess.getText().toString());
+        if (guess == randomNum) {
+            Toast.makeText(MainActivity.this, "Correct. Let's play again", Toast.LENGTH_SHORT).show();
+            randomNum = random.nextInt(20) + 1;
+        }
+        else if (guess < randomNum) {
+            Toast.makeText(MainActivity.this, "Too Low.", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(MainActivity.this, "Too High.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+}
+
+// XML File
+
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="I'm thinking of a number between 1 and 20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:alpha="0.5"
+        android:text="Can you guess it?"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:layout_editor_absoluteX="47dp" />
+
+    <EditText
+        android:id="@+id/numGuess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:onClick="guessClick"
+        android:text="Guess"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numGuess" />
+
+</android.support.constraint.ConstraintLayout>
