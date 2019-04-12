@@ -1,0 +1,48 @@
+public class MainActivity extends AppCompatActivity {
+
+    public void fade(View view) {
+        ImageView bart = findViewById(R.id.bart);
+        ImageView homer = findViewById(R.id.homer);
+
+        // (1) Random animations to move Bart and Homer around the screen (when Homer's alpha is 0.4)
+        /*
+        bart.animate().alpha(0).setDuration(2000); // fade-out Bart image to alpha 0 in 2seconds
+        homer.animate().alpha(1).setDuration(1); // fade-in Homer image to alpha 1 in 0.001seconds
+        bart.animate().translationY(1000).setDuration(2000); // lowers the image of Homer down 1000
+        */
+
+
+        // (2) Homer alpha is 1 and fading Homer out and sets Bart's image back to original position
+        //while rotating Bart by 180degrees
+        /*
+        ImageView homer = findViewById(R.id.homer);
+        // homer.animate().alpha(0).setDuration(1000); fades homer if wanted
+        bart.animate().translationX(0).setDuration(2000);
+        bart.animate().rotation(180).setDuration(2000);
+        */
+
+        // (3) Shrinking and enlarging
+        //bart.animate().scaleX(10).setDuration(100);
+        //bart.animate().scaleY(0.5f).setDuration(2000);
+        //bart.animate().scaleY(10).setDuration(2000);
+        //bart.animate().scaleY(0.5F).setDuration(2000);
+        //bart.animate().scaleX(4).scaleY(2);
+        bart.animate()
+                .scaleX(1000f)
+                .scaleY(1000f)
+                .rotation(3600)
+                .setDuration(20000);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // sets Bart image outside the screen for (2) in 'fade' method
+        /*
+        ImageView bart = findViewById(R.id.bart);
+        bart.setTranslationX(-1000);
+        */
+    }
+}
