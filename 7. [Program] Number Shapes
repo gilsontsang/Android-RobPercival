@@ -16,11 +16,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickMe(View view) {
         EditText numInput = findViewById(R.id.numInput);
-        int num = Integer.parseInt(numInput.getText().toString());
-        String result = returnResult(num);
-        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+        if (numInput.getText().toString().isEmpty()) {
+            Toast.makeText(this, "You did not enter anything!", Toast.LENGTH_SHORT).show();
+        } 
+        else {
+            int num = Integer.parseInt(numInput.getText().toString());
+            String result = returnResult(num);
+            Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+        }
     }
-
+    
     public String returnResult(int num) {
         boolean triangleSumTrue = false;
         boolean squaredSumTrue = false;
