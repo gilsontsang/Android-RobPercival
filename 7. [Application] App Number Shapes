@@ -1,3 +1,7 @@
+/*
+* This program calculates whether the number "num" is a triangular, a squared number, both or neither.
+*/
+
 public class MyClass {
     public static void main(String args[]) {
         
