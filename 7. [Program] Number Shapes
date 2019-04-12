@@ -1,0 +1,106 @@
+/*
+* This program calculates whether the number "num" is a triangular, a squared number, both or neither.
+*/
+
+// Main Class
+
+package com.example.myapplication;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    public void clickMe(View view) {
+        EditText numInput = findViewById(R.id.numInput);
+        int num = Integer.parseInt(numInput.getText().toString());
+        String result = returnResult(num);
+        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+    }
+
+    public String returnResult(int num) {
+        boolean triangleSumTrue = false;
+        boolean squaredSumTrue = false;
+
+        for(int i=1; i<num; i++) {
+            int triangleSum = i*(i+1)/2 - num;
+            int squaredSum = i*i - num;
+            if (triangleSum == 0) {
+                triangleSumTrue = true;
+            }
+            if (squaredSum == 0) {
+                squaredSumTrue = true;
+            }
+        }
+
+        if (triangleSumTrue == true && squaredSumTrue == true) {
+            return "It is both a Triangular Number and Square Number";
+        }
+        else if (triangleSumTrue == true) {
+            return "Triangular Number";
+        }
+        else if (squaredSumTrue == true) {
+            return "Square Number";
+        }
+        else {
+            return "Neither a Triangular Number nor Square Number";
+        }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+}
+
+// Activity Class
+
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:alpha="1"
+        android:text="Number Shape App!"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/numInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Enter a number..."
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:onClick="clickMe"
+        android:text="Click Me!"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numInput" />
+
+</android.support.constraint.ConstraintLayout>
