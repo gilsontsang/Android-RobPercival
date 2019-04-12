@@ -1,0 +1,33 @@
+public class MyClass {
+    public static void main(String args[]) {
+        
+        int num = 10;
+        boolean triangleSumTrue = false;
+        boolean squaredSumTrue = false;
+        
+        for(int i=1; i<num; i++) {
+            int triangleSum = i*(i+1)/2 - num;
+            int squaredSum = i*i - num;
+            if (triangleSum == 0) {
+                triangleSumTrue = true;
+            }
+            if (squaredSum == 0) {
+                squaredSumTrue = true;
+            }
+        }
+        
+        if (triangleSumTrue == true && squaredSumTrue == true) {
+        		System.out.println("It is both a Triangular Number and Square Number");
+        	}
+    	else if (triangleSumTrue == true) {
+    		System.out.println("Triangular Number");
+    	}
+    	else if (squaredSumTrue == true) {
+    		System.out.println("Square Number");
+    	}
+    	else {
+    		System.out.println("Neither a Triangular Number nor Square Number");
+    	}
+        
+    }
+}
