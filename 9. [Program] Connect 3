@@ -1,0 +1,553 @@
+/*
+* To be honest, this program took quite a while... Even with a background in Java, getting everything to work together in
+* Android Studio was a challenge. This program is the Connect 3 game.
+*/
+
+// Main Class
+
+package com.example.testenviro;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    boolean redTurn;
+    String isRed;
+    String isRed1;
+    String isRed2;
+    String isRed3;
+    String isRed4;
+    String isRed5;
+    String isRed6;
+    String isRed7;
+    String isRed8;
+    String isRed9;
+    int gameCounter = 0;
+    int redScore = 0;
+    int yellowScore = 0;
+
+    public void finishGame() {
+        if ((isRed1 == "red" && isRed2 == "red" && isRed3 == "red") ||
+                (isRed4 == "red" && isRed5 == "red" && isRed6 == "red") ||
+                (isRed7 == "red" && isRed8 == "red" && isRed9 == "red") ||
+                (isRed1 == "red" && isRed4 == "red" && isRed7 == "red") ||
+                (isRed2 == "red" && isRed5 == "red" && isRed8 == "red") ||
+                (isRed3 == "red" && isRed6 == "red" && isRed9 == "red") ||
+                (isRed1 == "red" && isRed5 == "red" && isRed9 == "red") ||
+                (isRed3 == "red" && isRed5 == "red" && isRed7 == "red")) {
+            Toast.makeText(this, "Red won! 3 reds are connected!", Toast.LENGTH_LONG).show();
+            resetGame();
+            redScore++;
+            displayScore();
+        }
+        else if ((isRed1 == "yellow" && isRed2 == "yellow" && isRed3 == "yellow") ||
+                (isRed4 == "yellow" && isRed5 == "yellow" && isRed6 == "yellow") ||
+                (isRed7 == "yellow" && isRed8 == "yellow" && isRed9 == "yellow") ||
+                (isRed1 == "yellow" && isRed4 == "yellow" && isRed7 == "yellow") ||
+                (isRed2 == "yellow" && isRed5 == "yellow" && isRed8 == "yellow") ||
+                (isRed3 == "yellow" && isRed6 == "yellow" && isRed9 == "yellow") ||
+                (isRed1 == "yellow" && isRed5 == "yellow" && isRed9 == "yellow") ||
+                (isRed3 == "yellow" && isRed5 == "yellow" && isRed7 == "yellow")) {
+            Toast.makeText(this, "Yellow won! 3 yellow are connected!", Toast.LENGTH_LONG).show();
+            resetGame();
+            yellowScore++;
+            displayScore();
+        }
+        else if (gameCounter == 9) {
+            Toast.makeText(this, "Tie Game. Game will reset.", Toast.LENGTH_LONG).show();
+            resetGame();
+        }
+    }
+
+    public void displayScore() {
+        Toast.makeText(this, "Score: Yellow " + yellowScore + " to Red " + redScore, Toast.LENGTH_LONG).show();
+    }
+
+    public void resetGame() {
+        isRed1 = null;
+        isRed2 = null;
+        isRed3 = null;
+        isRed4 = null;
+        isRed5 = null;
+        isRed6 = null;
+        isRed7 = null;
+        isRed8 = null;
+        isRed9 = null;
+        ImageView redClick1 = findViewById(R.id.redClick1);
+        ImageView yellowClick1 = findViewById(R.id.yellowClick1);
+        ImageView redClick2 = findViewById(R.id.redClick2);
+        ImageView yellowClick2 = findViewById(R.id.yellowClick2);
+        ImageView redClick3 = findViewById(R.id.redClick3);
+        ImageView yellowClick3 = findViewById(R.id.yellowClick3);
+        ImageView redClick4 = findViewById(R.id.redClick4);
+        ImageView yellowClick4 = findViewById(R.id.yellowClick4);
+        ImageView redClick5 = findViewById(R.id.redClick5);
+        ImageView yellowClick5 = findViewById(R.id.yellowClick5);
+        ImageView redClick6 = findViewById(R.id.redClick6);
+        ImageView yellowClick6 = findViewById(R.id.yellowClick6);
+        ImageView redClick7 = findViewById(R.id.redClick7);
+        ImageView yellowClick7 = findViewById(R.id.yellowClick7);
+        ImageView redClick8 = findViewById(R.id.redClick8);
+        ImageView yellowClick8 = findViewById(R.id.yellowClick8);
+        ImageView redClick9 = findViewById(R.id.redClick9);
+        ImageView yellowClick9 = findViewById(R.id.yellowClick9);
+        redClick1.animate().alpha(0);
+        yellowClick1.animate().alpha(0);
+        redClick2.animate().alpha(0);
+        yellowClick2.animate().alpha(0);
+        redClick3.animate().alpha(0);
+        yellowClick3.animate().alpha(0);
+        redClick4.animate().alpha(0);
+        yellowClick4.animate().alpha(0);
+        redClick5.animate().alpha(0);
+        yellowClick5.animate().alpha(0);
+        redClick6.animate().alpha(0);
+        yellowClick6.animate().alpha(0);
+        redClick7.animate().alpha(0);
+        yellowClick7.animate().alpha(0);
+        redClick8.animate().alpha(0);
+        yellowClick8.animate().alpha(0);
+        redClick9.animate().alpha(0);
+        yellowClick9.animate().alpha(0);
+        gameCounter = 0;
+
+    }
+
+    public void gameButton1(View view) {
+        ImageView redClick = findViewById(R.id.redClick1);
+        ImageView yellowClick = findViewById(R.id.yellowClick1);
+        isRed1 = redTurnClick(redClick,yellowClick);
+        gameCounter++;
+        finishGame();
+    }
+
+    public void gameButton2(View view) {
+        ImageView redClick = findViewById(R.id.redClick2);
+        ImageView yellowClick = findViewById(R.id.yellowClick2);
+        isRed2 = redTurnClick(redClick,yellowClick);
+        gameCounter++;
+        finishGame();
+    }
+
+    public void gameButton3(View view) {
+        ImageView redClick = findViewById(R.id.redClick3);
+        ImageView yellowClick = findViewById(R.id.yellowClick3);
+        isRed3 = redTurnClick(redClick,yellowClick);
+        gameCounter++;
+        finishGame();
+    }
+
+    public void gameButton4(View view) {
+        ImageView redClick = findViewById(R.id.redClick4);
+        ImageView yellowClick = findViewById(R.id.yellowClick4);
+        isRed4 = redTurnClick(redClick,yellowClick);
+        gameCounter++;
+        finishGame();
+    }
+
+    public void gameButton5(View view) {
+        ImageView redClick = findViewById(R.id.redClick5);
+        ImageView yellowClick = findViewById(R.id.yellowClick5);
+        isRed5 = redTurnClick(redClick,yellowClick);
+        gameCounter++;
+        finishGame();
+    }
+
+    public void gameButton6(View view) {
+        ImageView redClick = findViewById(R.id.redClick6);
+        ImageView yellowClick = findViewById(R.id.yellowClick6);
+        isRed6 = redTurnClick(redClick,yellowClick);
+        gameCounter++;
+        finishGame();
+    }
+
+    public void gameButton7(View view) {
+        ImageView redClick = findViewById(R.id.redClick7);
+        ImageView yellowClick = findViewById(R.id.yellowClick7);
+        isRed7 = redTurnClick(redClick,yellowClick);
+        gameCounter++;
+        finishGame();
+    }
+
+    public void gameButton8(View view) {
+        ImageView redClick = findViewById(R.id.redClick8);
+        ImageView yellowClick = findViewById(R.id.yellowClick8);
+        isRed8 = redTurnClick(redClick,yellowClick);
+        gameCounter++;
+        finishGame();
+    }
+
+    public void gameButton9(View view) {
+        ImageView redClick = findViewById(R.id.redClick9);
+        ImageView yellowClick = findViewById(R.id.yellowClick9);
+        isRed9 = redTurnClick(redClick,yellowClick);
+        gameCounter++;
+        finishGame();
+    }
+
+    public String redTurnClick(ImageView redClick, ImageView yellowClick) {
+        if(redTurn) {
+            redClick.animate().alpha(1);
+            yellowClick.animate().alpha(0);
+            redTurn = false;
+            isRed = "red";
+        }
+        else {
+            yellowClick.animate().alpha(1);
+            redClick.animate().alpha(0);
+            redTurn = true;
+            isRed = "yellow";
+        }
+        return isRed;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Toast.makeText(this, "Player 1 is Yellow. Yellow starts first!", Toast.LENGTH_LONG).show();
+    }
+}
+
+// Activity Class
+
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView21"
+        android:layout_width="152dp"
+        android:layout_height="277dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/vertical" />
+
+    <ImageView
+        android:id="@+id/redClick1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginTop="60dp"
+        android:alpha="0"
+        android:onClick="gameButton1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/red" />
+
+    <ImageView
+        android:id="@+id/yellowClick1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:alpha="0"
+        android:onClick="gameButton1"
+        app:layout_constraintBottom_toBottomOf="@+id/redClick1"
+        app:layout_constraintEnd_toEndOf="@+id/redClick1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/redClick1"
+        app:layout_constraintTop_toTopOf="@+id/redClick1"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/yellow" />
+
+    <ImageView
+        android:id="@+id/redClick2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:alpha="0"
+        android:onClick="gameButton2"
+        app:layout_constraintBottom_toBottomOf="@+id/yellowClick2"
+        app:layout_constraintEnd_toEndOf="@+id/yellowClick2"
+        app:layout_constraintStart_toStartOf="@+id/yellowClick2"
+        app:layout_constraintTop_toTopOf="@+id/yellowClick2"
+        app:srcCompat="@drawable/red" />
+
+    <ImageView
+        android:id="@+id/yellowClick2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:alpha="0"
+        android:onClick="gameButton2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/yellow" />
+
+    <ImageView
+        android:id="@+id/redClick3"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginRight="64dp"
+        android:alpha="0"
+        android:onClick="gameButton3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/red" />
+
+    <ImageView
+        android:id="@+id/yellowClick3"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:alpha="0"
+        android:onClick="gameButton3"
+        app:layout_constraintBottom_toBottomOf="@+id/redClick3"
+        app:layout_constraintEnd_toEndOf="@+id/redClick3"
+        app:layout_constraintStart_toStartOf="@+id/redClick3"
+        app:layout_constraintTop_toTopOf="@+id/redClick3"
+        app:srcCompat="@drawable/yellow" />
+
+    <ImageView
+        android:id="@+id/redClick4"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="120dp"
+        android:alpha="0"
+        android:onClick="gameButton4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/red" />
+
+    <ImageView
+        android:id="@+id/yellowClick4"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:alpha="0"
+        android:onClick="gameButton4"
+        app:layout_constraintBottom_toBottomOf="@+id/redClick4"
+        app:layout_constraintEnd_toEndOf="@+id/redClick4"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/redClick4"
+        app:layout_constraintTop_toTopOf="@+id/redClick4"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/yellow" />
+
+    <ImageView
+        android:id="@+id/redClick5"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:alpha="0"
+        android:onClick="gameButton5"
+        app:layout_constraintBottom_toBottomOf="@+id/yellowClick5"
+        app:layout_constraintEnd_toEndOf="@+id/yellowClick5"
+        app:layout_constraintStart_toStartOf="@+id/yellowClick5"
+        app:layout_constraintTop_toTopOf="@+id/yellowClick5"
+        app:srcCompat="@drawable/red" />
+
+    <ImageView
+        android:id="@+id/yellowClick5"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:alpha="0"
+        android:onClick="gameButton5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/yellow" />
+
+    <ImageView
+        android:id="@+id/redClick6"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginRight="64dp"
+        android:alpha="0"
+        android:onClick="gameButton6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/red" />
+
+    <ImageView
+        android:id="@+id/yellowClick6"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:alpha="0"
+        android:onClick="gameButton6"
+        app:layout_constraintBottom_toBottomOf="@+id/redClick6"
+        app:layout_constraintEnd_toEndOf="@+id/redClick6"
+        app:layout_constraintStart_toStartOf="@+id/redClick6"
+        app:layout_constraintTop_toTopOf="@+id/redClick6"
+        app:srcCompat="@drawable/yellow" />
+
+    <ImageView
+        android:id="@+id/redClick7"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginTop="180dp"
+        android:alpha="0"
+        android:onClick="gameButton7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/red" />
+
+    <ImageView
+        android:id="@+id/yellowClick7"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:alpha="0"
+        android:onClick="gameButton7"
+        app:layout_constraintBottom_toBottomOf="@+id/redClick7"
+        app:layout_constraintEnd_toEndOf="@+id/redClick7"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/redClick7"
+        app:layout_constraintTop_toTopOf="@+id/redClick7"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/yellow" />
+
+    <ImageView
+        android:id="@+id/redClick8"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:alpha="0"
+        android:onClick="gameButton8"
+        app:layout_constraintBottom_toBottomOf="@+id/yellowClick8"
+        app:layout_constraintEnd_toEndOf="@+id/yellowClick8"
+        app:layout_constraintStart_toStartOf="@+id/yellowClick8"
+        app:layout_constraintTop_toTopOf="@+id/yellowClick8"
+        app:srcCompat="@drawable/red" />
+
+    <ImageView
+        android:id="@+id/yellowClick8"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:alpha="0"
+        android:onClick="gameButton8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/yellow" />
+
+    <ImageView
+        android:id="@+id/redClick9"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginRight="64dp"
+        android:alpha="0"
+        android:onClick="gameButton9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/red" />
+
+    <ImageView
+        android:id="@+id/yellowClick9"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:alpha="0"
+        android:onClick="gameButton9"
+        app:layout_constraintBottom_toBottomOf="@+id/redClick9"
+        app:layout_constraintEnd_toEndOf="@+id/redClick9"
+        app:layout_constraintStart_toStartOf="@+id/redClick9"
+        app:layout_constraintTop_toTopOf="@+id/redClick9"
+        app:srcCompat="@drawable/yellow" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="152dp"
+        android:layout_height="277dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/vertical" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="152dp"
+        android:layout_height="277dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginLeft="116dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/vertical" />
+
+    <ImageView
+        android:id="@+id/imageView20"
+        android:layout_width="189dp"
+        android:layout_height="245dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginLeft="68dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/horizontal3" />
+
+    <ImageView
+        android:id="@+id/imageView22"
+        android:layout_width="189dp"
+        android:layout_height="245dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginLeft="68dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/horizontal3" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="210dp"
+        android:layout_height="112dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="348dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:alpha="1.5"
+        android:text="Let's play some Tic Tac Toe!"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.648"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+
+</android.support.constraint.ConstraintLayout>
