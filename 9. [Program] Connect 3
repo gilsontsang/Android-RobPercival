@@ -580,10 +580,10 @@ public void dropIn(View view) {
 counter.getTag().toString();
 
 // When a grid layout is used, and we want to loop through the items inside that grid layout (it's child)
-// then we can use the below to make all images in that gridLayout to not appear
+// then we can use the below to make all images in that gridLayout to an empty image.
 
 GridLayout gridLayout = findViewById(R.id.gridLayout);
 
 for (int i=0; i<gridLayout.getChildCount); i++) {
-	(ImageView) gridLayout.getChildAt(i).setImageResource(0);
+	((ImageView) gridLayout.getChildAt(i)).setImageResource(0);
 }
