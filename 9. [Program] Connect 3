@@ -551,3 +551,30 @@ public class MainActivity extends AppCompatActivity {
 
 
 </android.support.constraint.ConstraintLayout>
+
+// Notes from Rob's solution
+
+// The below code, takes the image up 1000f, then animates the image back into position
+
+public void dropIn(View view) {
+	ImageView counter = view;
+	counter.setTranslationY(-1000f); 
+	counter.setImageResource(R.drawable.yellow);
+	counter.animate().translationYBy(1000f).rotation(3600).setDuration(300);
+}
+
+// Tagging ImageView ... below represents thing 0 1 2...
+
+<ImageView
+	android:tag="0"
+/>
+<ImageView
+	android:tag="1"
+/>
+<ImageView
+	android:tag="2"
+/>
+
+// To retrieve tag
+
+counter.getTag().toString();
