@@ -1,0 +1,59 @@
+package com.tsang.gilson.myapplication;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
+        // ListView
+        ListView myListView = findViewById(R.id.myListView);
+
+        // ArrayList
+        final ArrayList<String> familyNames = new ArrayList<String>();
+
+        familyNames.add("alpha");
+        familyNames.add("bravo");
+        familyNames.add("charlie");
+        familyNames.add("delta");
+        familyNames.add("1");
+        familyNames.add("2");
+        familyNames.add("3");
+        familyNames.add("4");
+        familyNames.add("5");
+        familyNames.add("6");
+        familyNames.add("7");
+        familyNames.add("8");
+
+        // Alternatively, we can create array list as such
+        // final ArrayList<String> familyNames = new ArrayList<String>(asList("alpha","bravo","charlie"));
+
+        // Array Adapter to bridge the ListView and ArrayList
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,familyNames);
+
+        myListView.setAdapter(arrayAdapter);
+
+        // Selecting individual items inside ArrayList in the ListView
+        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(),familyNames.get(position), Toast.LENGTH_LONG).show();
+                Log.i("Names ", familyNames.get(position));
+            }
+        });
+    }
+}
