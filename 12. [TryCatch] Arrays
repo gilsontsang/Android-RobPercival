@@ -1,0 +1,37 @@
+// Try and Catch using the above code to avoid programs from crashing. For example, if the
+// for loop is "for(int i=0; i<4...)", and we try to print it, it will crash the app
+// advising the Array index is out of bounds because array should only be containing 3 integers.
+
+import java.util.Arrays;
+
+int[] array = new int[3]; // create an empty array that holds 3 Integers
+
+try {
+	for(int i=0; i<4; i++) {
+		array[i] = i;
+	}
+}
+catch (Exception e) { // "e" can be anything, "e" is the error
+	System.out.println("There was a problem");
+	System.out.println(e);
+}
+
+System.out.println(Arrays.toString(array)); 
+/* Output:
+There was a problem
+[0,1,2]
+*/
+
+// Similarly, catch can catch several exceptions.
+catch (ArrayIndexOutOfBoundsException e) {
+	System.out.println("Out of bounds");
+}
+catch (Exception e) {
+	System.out.println("There was a problem");
+	System.out.println(e);
+}
+/* NOTICE, it did not print the second catch. Catch ends the loop
+Output:
+Out of bounds
+[0,1,2]
+*/
