@@ -1,0 +1,128 @@
+// AsyncTask Overview
+
+public class MainActivity extends AppCompatActivity {
+
+    public class DownloadTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            Log.i("URL",strings[0]);
+            Log.i("URL",strings[1]);
+            Log.i("URL",strings[2]);
+
+            return null;
+            // return "Done"; <- Use this line if we want to say we completed a task
+
+        }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        DownloadTask task = new DownloadTask();
+
+        /*
+        If we want to save the String to result
+
+        String result = null;
+        try{
+            result = task.executive("www.google.ca");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.i("Result",result);
+
+         */
+
+        // using try catch, to make sure internet connection is established.
+        try {
+            task.execute("http://www.zappycode.com", "www.google.com", "www.stackoverflow.com"); // URL
+            // task can be accessed by task[0],task[1]...
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            // logs the error
+        }
+    }
+}
+
+
+
+
+// Grabbing information from websites/URL
+
+import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class MainActivity extends AppCompatActivity {
+
+    public class DownloadTask extends AsyncTask<String, Void, String> {
+
+        /*
+        Note. This requires user's permission. Inside Android Manifest, above
+        application but below manifest, add in:
+        <uses-permission android:name="android.permission.INTERNET" />
+
+         */
+
+        @Override
+        protected String doInBackground(String... urls) {
+
+            String result = "";
+            URL url;
+            HttpURLConnection urlConnection = null;
+
+            try {
+                url = new URL(urls[0]);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                InputStream in = urlConnection.getInputStream();
+                InputStreamReader reader = new InputStreamReader(in);
+                int data = reader.read();
+
+                while (data != -1) {
+                    char current = (char) data;
+                    result += current;
+                    data = reader.read();
+                }
+
+                return result;
+
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+
+                return "Failed";
+            }
+        }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        DownloadTask task = new DownloadTask();
+
+        String result = null;
+        try {
+            result = task.execute("https://www.zappycode.com").get();
+            //task.execute("http://www.zappycode.com", "www.google.com", "www.stackoverflow.com");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Log.i("Result",result);
+    }
+}
