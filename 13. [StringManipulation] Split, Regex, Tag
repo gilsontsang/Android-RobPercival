@@ -23,3 +23,16 @@ Matcher m = p.matcher(river);
 while(m.find()) {
 	System.out.println(m.group(1));
 }
+
+// Tag
+
+// In order to use Tag, the object must be assigned a tag value.
+// For example, if the value is tagged "0", then we can compared the tagged value to a value we want to compare it to.
+
+// Let us compare it to identity = 1 using an onClick button with the onClick set to "clickHere"
+
+public void clickHere(View view) {
+	if (view.getTag().toString().equals(Integer.toString(identity))) {
+		// do something.
+	}
+}
