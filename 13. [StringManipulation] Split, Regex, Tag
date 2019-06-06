@@ -36,3 +36,6 @@ public void clickHere(View view) {
 		// do something.
 	}
 }
+
+// Notes
+// \r\n creates a new line
