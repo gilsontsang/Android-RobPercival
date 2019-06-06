@@ -1,4 +1,9 @@
-// Hiding Keyboard
+// Hiding Keyboard after pressing the button "test"
 
-InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-mgr.hideSoftInputFromWindow(editText.getWindowToken(), flags: 0);
+public void test(View view) {
+  // Do something
+  InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+  mgr.hideSoftInputFromWindow(editText.getWindowToken(), flags: 0);
+}
+
+
