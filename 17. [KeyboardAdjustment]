@@ -6,8 +6,9 @@ public void test(View view) {
   mgr.hideSoftInputFromWindow(editText.getWindowToken(), flags: 0);
 }
 
-// Spacing = %20
+// Note1: Spacing = %20
+// Note2: Anything related to URL requires try {} catch {}
 // To avoid spacing, use assistance of UTF-8. For example, if the value "salt lake city" was used as the URL, then URLEncoder will change
-// the String to "...salt%20lake%20city..."
+// the String to "...salt%20lake%20city...".
 
 String encodedCityName = URLEncoder.encode(editText.getText().toString(), "UTF-8");
