@@ -6,4 +6,4 @@ public void test(View view) {
   mgr.hideSoftInputFromWindow(editText.getWindowToken(), flags: 0);
 }
 
-
+// Spacing = %20
