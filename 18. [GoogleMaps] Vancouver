@@ -1,3 +1,9 @@
+/*
+In Android Manifest, we must enable location permissions.
+<!-- Fine location uses GPS to track. Coarse location uses Wifi/Data -->
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+*/
+
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
