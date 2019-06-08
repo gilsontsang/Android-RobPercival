@@ -40,9 +40,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
+        // Hybrid imagery
+        // mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+
+        // Add a marker in Vancouver and move the camera
         LatLng vancouver = new LatLng(49.2827, -123.1207);
+
+        // Adjusting what the marker displays
         mMap.addMarker(new MarkerOptions().position(vancouver).title("Vancouver!"));
+        // Sets marker's color with .icon
+        // mMap.addMarker(new MarkerOptions().position(vancouver).title("Vancouver!").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+
+        // Default setting for default city
         mMap.moveCamera(CameraUpdateFactory.newLatLng(vancouver));
+        // Setting different zooms (1 is most zoomed out, 2 is most zoomed in)
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(vancouver, 15));
     }
 }
