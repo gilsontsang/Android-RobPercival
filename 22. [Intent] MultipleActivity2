@@ -1,0 +1,89 @@
+// MainActivity.java
+
+package com.tsang.gilson.multipleactivity;
+
+        import android.content.Intent;
+        import android.support.v7.app.AppCompatActivity;
+        import android.os.Bundle;
+        import android.view.View;
+        import android.widget.AdapterView;
+        import android.widget.ArrayAdapter;
+        import android.widget.ListView;
+
+        import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity {
+
+    /*
+    This activity allows a user to click on an item in an arrayList within a listView and then
+    it goes to a different activity
+     */
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        ListView listView = findViewById(R.id.listView);
+
+        final ArrayList<String> letterList = new ArrayList<String>();
+
+        letterList.add("a");
+        letterList.add("b");
+        letterList.add("c");
+        letterList.add("d");
+        letterList.add("e");
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, letterList);
+
+        listView.setAdapter(arrayAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(),SecondActivity.class);
+                intent.putExtra("letter",letterList.get(position));
+                startActivity(intent);
+            }
+        });
+
+    }
+}
+
+
+// SecondActivity.java
+
+package com.tsang.gilson.multipleactivity;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+
+public class SecondActivity extends AppCompatActivity {
+
+    public void goToMain(View view) {
+        //Go back to last page
+        //Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        //startActivity(intent);
+
+        //Go back to last page and allow the back button to exit app on main activity
+        finish();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_second);
+
+
+        Intent intent = getIntent();
+        String letter = intent.getStringExtra("letter");
+
+        // Confirm it is working
+        Toast.makeText(this,letter,Toast.LENGTH_SHORT).show();
+
+    }
+}
