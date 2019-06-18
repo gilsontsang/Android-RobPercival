@@ -1,0 +1,114 @@
+// MainActivity.java
+
+package com.tsang.gilson.databasestorage;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        SharedPreferences sharedPreferences = this.getSharedPreferences("com.tsang.gilson.databasestorage", Context.MODE_PRIVATE);
+
+        // Saving an ArrayList of friends
+        ArrayList<String> friends = new ArrayList<>();
+        friends.add("a");
+        friends.add("b");
+        friends.add("c");
+
+        // Using Object Serializer class
+        try {
+            sharedPreferences.edit().putString("friends",ObjectSerializer.serialize(friends)).apply();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        // Retrieve friends back from Serializer 
+        ArrayList<String> newFriends = new ArrayList<>();
+        try {
+            newFriends = (ArrayList<String>) ObjectSerializer.deserialize(sharedPreferences
+                    .getString("friends", ObjectSerializer.serialize(new ArrayList<String>())));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+}
+
+
+// ObjectSerializer.java
+
+package com.tsang.gilson.databasestorage;
+
+import android.util.Log;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+
+public class ObjectSerializer {
+
+
+    public static String serialize(Serializable obj) throws IOException {
+        if (obj == null) return "";
+        try {
+            ByteArrayOutputStream serialObj = new ByteArrayOutputStream();
+            ObjectOutputStream objStream = new ObjectOutputStream(serialObj);
+            objStream.writeObject(obj);
+            objStream.close();
+            return encodeBytes(serialObj.toByteArray());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Object deserialize(String str) throws IOException {
+        if (str == null || str.length() == 0) return null;
+        try {
+            ByteArrayInputStream serialObj = new ByteArrayInputStream(decodeBytes(str));
+            ObjectInputStream objStream = new ObjectInputStream(serialObj);
+            return objStream.readObject();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String encodeBytes(byte[] bytes) {
+        StringBuffer strBuf = new StringBuffer();
+
+        for (int i = 0; i < bytes.length; i++) {
+            strBuf.append((char) (((bytes[i] >> 4) & 0xF) + ((int) 'a')));
+            strBuf.append((char) (((bytes[i]) & 0xF) + ((int) 'a')));
+        }
+
+        return strBuf.toString();
+    }
+
+    public static byte[] decodeBytes(String str) {
+        byte[] bytes = new byte[str.length() / 2];
+        for (int i = 0; i < str.length(); i+=2) {
+            char c = str.charAt(i);
+            bytes[i/2] = (byte) ((c - 'a') << 4);
+            c = str.charAt(i+1);
+            bytes[i/2] += (c - 'a');
+        }
+        return bytes;
+    }
+
+}
