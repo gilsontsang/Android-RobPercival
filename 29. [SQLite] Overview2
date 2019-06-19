@@ -1,0 +1,54 @@
+package com.tsang.gilson.sqldatabase;
+
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        SQLiteDatabase myDatabase = this.openOrCreateDatabase("Users", MODE_PRIVATE, null);
+
+        // To differentiate values that are equal... for example 2 users with the name Nick. id's are used
+
+        // Have 3 properites of users name, age and id. This automatically counts the id for us
+        myDatabase.execSQL("CREATE TABLE IF NOT EXISTS newUsers (name VARCHAR, age INT(3), id INTEGER PRIMARY KEY)");
+
+        // Add to database
+        myDatabase.execSQL("INSERT INTO newUsers (name,age) VALUES ('Nick',28)"); // id will be 1
+        myDatabase.execSQL("INSERT INTO newUsers (name,age) VALUES ('Gilson',14)"); // id will be 2
+        myDatabase.execSQL("INSERT INTO newUsers (name,age) VALUES ('Nick',29)"); // id will be 3
+
+        // Delete from database
+        myDatabase.execSQL("DELETE FROM newUsers WHERE id = 1");
+        // If we only want to delete 1
+        // myDatabase.execSQL("DELETE FROM newUsers WHERE name = 'Nick'");
+
+        // Retrieve from database
+        Cursor c = myDatabase.rawQuery("SELECT * FROM newUsers",null);
+        // OPTIONAL: Getting users over 18
+        // WHERE tag is more efficient than trying to query inside a while-loop
+        // Cursor c = myDatabase.rawQuery("SELECT * FROM users WHERE age > 18",null);
+        // Cursor c = myDatabase.rawQuery("SELECT * FROM users WHERE name = 'Nick' AND age > 18",null);
+        // Cursor c = myDatabase.rawQuery("SELECT * FROM users WHERE name LIKE 'N%'",null); // Starts with N
+        // Cursor c = myDatabase.rawQuery("SELECT * FROM users WHERE name LIKE '%a%'",null); // a is in-between the VARCHAR
+        int nameIndex = c.getColumnIndex("name");
+        int ageIndex = c.getColumnIndex("age");
+        int idIndex = c.getColumnIndex("id");
+        c.moveToFirst();
+
+        while (c != null) {
+            Log.i("name",c.getString(nameIndex));
+            Log.i("age",c.getString(ageIndex));
+            Log.i("id",c.getString(idIndex));
+            c.moveToNext();
+        }
+
+    }
+}
