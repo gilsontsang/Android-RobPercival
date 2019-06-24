@@ -1,0 +1,59 @@
+// MainActivity.java
+
+package com.tsang.gilson.webview;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        WebView webView = findViewById(R.id.webView);
+
+        // Makes sure javascript is enabled
+        webView.getSettings().setJavaScriptEnabled(true);
+
+        // Opens webView inside our app instead of Android asking
+        // whether we should use a browser to open up the webView
+        webView.setWebViewClient(new WebViewClient());
+
+        // Launching ESPN inside the webView
+        // webView.loadUrl("http://www.espn.com");
+
+        // Writing HTML inside the webView
+        webView.loadData("<html><body><h1>Hello World!</h1><p>This is a cool website</p></body></html>",
+                "text/html", "UTF-8");
+    }
+}
+
+
+// activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="395dp"
+        android:layout_height="715dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>
